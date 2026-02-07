@@ -22,19 +22,29 @@ envelope.addEventListener("click", () => {
 
 // Logic to move the NO btn
 
-noBtn.addEventListener("mouseover", () => {
-    const min = 200;
-    const max = 200;
+function moveNoBtn() {
+    // Reset position
+    noBtn.style.transition = "none";
+    noBtn.style.transform = "translate(0, 0)";
 
-    const distance = Math.random() * (max - min) + min;
+    // Force reflow (this is crucial)
+    noBtn.offsetHeight;
+
+    // Random movement
+    const distance = 200;
     const angle = Math.random() * Math.PI * 2;
 
     const moveX = Math.cos(angle) * distance;
     const moveY = Math.sin(angle) * distance;
 
-    noBtn.style.transition = "transform 0.3s ease";
+    noBtn.style.transition = "transform 0.25s ease";
     noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
-});
+}
+
+// Desktop + Mobile support
+noBtn.addEventListener("mouseenter", moveNoBtn);
+noBtn.addEventListener("touchstart", moveNoBtn);
+
 
 // Logic to make YES btn to grow
 
